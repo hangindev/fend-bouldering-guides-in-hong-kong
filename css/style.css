@@ -1,0 +1,65 @@
+html, body {
+    height: 100%;
+}
+
+.fill {
+    min-height: 100%;
+    height: 100%;
+}
+
+#map {
+    height: 100%;
+}
+
+.ft-container label{
+	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+	width: 33.33%;
+	height: 30px;
+	cursor: pointer;
+	color: #777;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+	line-height: 33px;
+	font-size: 19px;
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #ffffff 1%, #eaeaea 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#eaeaea));
+	background: -webkit-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	background: -o-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	background: -ms-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	background: linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
+	float:left;
+	box-shadow: 0px 0px 0px 1px #aaa, 1px 0px 0px 0px rgba(255,255,255,0.9) inset, 0px 1px 2px rgba(0,0,0,0.2);
+}
+.ft-container label.ft-label-all{
+	border-radius: 3px 0px 0px 3px;
+}
+.ft-container label.ft-label-outdoor{
+	border-radius: 0px 3px 3px 0px;
+}
+.ft-container input.ft-selector-all:checked ~ label.ft-label-all,
+.ft-container input.ft-selector-indoor:checked ~ label.ft-label-indoor,
+.ft-container input.ft-selector-outdoor:checked ~ label.ft-label-outdoor{
+	background: #646d93;
+	background: -moz-linear-gradient(top, #646d93 0%, #7c87ad 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#646d93), color-stop(100%,#7c87ad));
+	background: -webkit-linear-gradient(top, #646d93 0%,#7c87ad 100%);
+	background: -o-linear-gradient(top, #646d93 0%,#7c87ad 100%);
+	background: -ms-linear-gradient(top, #646d93 0%,#7c87ad 100%);
+	background: linear-gradient(top, #646d93 0%,#7c87ad 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#646d93', endColorstr='#7c87ad',GradientType=0 );
+	color: #424d71;
+	text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
+	box-shadow: 0px 0px 0px 1px #40496e, 0 1px 2px rgba(0,0,0,0.1) inset;
+}
+.ft-container input{
+	display: none;
+}
+
+.carousel-inner>.item>img,
+.carousel-inner>.item>a>img{
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 350px;
+  width: 350px;
+}
