@@ -1,51 +1,84 @@
 <!DOCTYPE html>
-  <head>
-      <meta charset="UTF-8">
-      <title>Neighborhood Map</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-      <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Bouldering Guides in Hong Kong</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
+</head>
 <body>
-  <div class="container-fluid fill">
-    <div class="row fill">
-      <div class="col-md-3">
-        <h4>Bouldering Places</h4>
 
-        <div class="row">
-          <div class="col-md-12 ft-container">
-            <input id="select-all" type="radio" value="All" class="ft-selector-all" checked="checked" data-bind="checked: selectedOption, click: changeList">
-            <label for="select-all" class="ft-label-all text-center">All</label>
-            <input id="select-indoor" type="radio" value="Indoor" class="ft-selector-indoor" data-bind="checked: selectedOption, click: changeList">
-            <label for="select-indoor" class="ft-label-indoor text-center">Indoor</label>
-            <input id="select-outdoor" type="radio" value="Outdoor" class="ft-selector-outdoor" data-bind="checked: selectedOption, click: changeList">
-            <label for="select-outdoor" class="ft-label-outdoor text-center">Outdoor</label>
-          </div>
-        </div>
+  <div id="sideMenu" class="sideMenu container-fluid">
 
-        <div class="row">
-          <div class="col-md-12 ft-container">
-            <ul class="list-group" data-bind="foreach: markers">
-              <!-- ko if: displayText -->
-              <li class="list-group-item" data-bind="text: title"></li>
-              <!-- /ko -->
-            </ul>
-          </div>
+    <div class="row">
+      <div class="col-md-12">
+        <header>
+          <span class="glyphicon glyphicon-remove remove-icon" data-bind="click: closeMenu"></span>
+          <h3>Bouldering Guides</h3>
+          <h4>in Hong Kong</h4>
+          <br>
+        </header>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ft-container">
+          <input id="select-all" type="radio" value="All" class="ft-selector-all" checked="checked" data-bind="checked: selectedOption, click: changeList">
+          <label for="select-all" class="ft-label-all text-center">All</label>
+          <input id="select-indoor" type="radio" value="Indoor" class="ft-selector-indoor" data-bind="checked: selectedOption, click: changeList">
+          <label for="select-indoor" class="ft-label-indoor text-center">Indoor</label>
+          <input id="select-outdoor" type="radio" value="Outdoor" class="ft-selector-outdoor" data-bind="checked: selectedOption, click: changeList">
+          <label for="select-outdoor" class="ft-label-outdoor text-center">Outdoor</label>
         </div>
       </div>
-      <div id="map" class="col-md-9"></div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-unstyled placelist" data-bind="foreach: markers">
+          <!-- ko if: displayText -->
+          <li class="placelist-item" data-bind="text: title, click: function() { $parent.populateInfoWindow(this) }"></li>
+          <!-- /ko -->
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <footer class="footer">
+          <span>Made by The Nrator © </span>
+          <a href="https://github.com/nrator" class='zocial-github'></a>
+        </footer>
+      </div>
+    </div>
+
   </div>
 
+  <div id="main" class="container-fluid fill">
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script src="js/knockout-3.4.1.js"></script>
-    <!-- Google Maps -->
-    <!-- async defer -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ4XpBz3d2MQfC_lSV6A--aJ8wK7xFs00&v=3"></script>
-    <!-- App -->
-    <script src="js/app.js"></script>
+    <span class="menu-icon" data-bind="click: openMenu">&#9776; Menu</span>
+
+    <div class="row fill">
+      <div id="map"></div>
+    </div>
+
+    <div class="title">
+      <p class="title1 text-right">Bouldering Guides</p>
+      <p class="title2 text-right">in Hong Kong</p>
+    </div>
+
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="js/knockout-3.4.1.js"></script>
+  <!-- Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ4XpBz3d2MQfC_lSV6A--aJ8wK7xFs00&v=3"></script>
+  <!-- App -->
+  <script src="js/app.js"></script>
 
 </body>
 </html>

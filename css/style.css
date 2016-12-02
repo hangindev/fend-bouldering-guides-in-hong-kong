@@ -1,5 +1,60 @@
+@import url(http://weloveiconfonts.com/api/?family=zocial);
+
+/* zocial */
+[class*="zocial-"]:before {
+  font-family: 'zocial', sans-serif;
+}
+
 html, body {
     height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+}
+
+.title {
+    font-family: 'Oswald', sans-serif;
+    position:fixed;
+    height:110px;
+    right:0px;
+    bottom:0px;
+    margin-right: 10px;
+    text-shadow: 1px 1px 2px #999999;
+    word-wrap: break-word;
+}
+
+.title1 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.title2 {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+@media (min-width: 700px) {
+  .title {
+      height:130px;
+      margin-right: 20px;
+  }
+
+  .title1 {
+      font-size: 35px;
+      font-weight: 900;
+  }
+
+  .title2 {
+      font-size: 30px;
+      font-weight: 900;
+  }
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar-header {
+    float: right;
 }
 
 .fill {
@@ -11,55 +66,97 @@ html, body {
     height: 100%;
 }
 
+.sideMenu {
+	  background: #ffffff;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    left: -30px;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.footer {
+    position:fixed;
+    bottom:0px;
+    padding-bottom: 20px;
+}
+
+.remove-icon {
+    font-size: 30px;
+    cursor: pointer;
+    float: right;
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+.menu-icon {
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    padding-top: 20px;
+    margin-left: 10px;
+    text-shadow: 1px 1px 2px #999999;
+}
+
+.placelist {
+    margin-right: 0.667px;
+}
+
+.placelist-item {
+    height: 33px;
+    padding: 10px 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    font-weight: 300;
+    cursor: pointer;ter;
+}
+
+.placelist-item:hover {
+    background-color: #fcfbd4;
+}
+
+#main {
+    transition: margin-left .5s;
+}
+
 .ft-container label{
-	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-	width: 33.33%;
-	height: 30px;
-	cursor: pointer;
-	color: #777;
-	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
-	line-height: 33px;
-	font-size: 19px;
-	background: #ffffff;
-	background: -moz-linear-gradient(top, #ffffff 1%, #eaeaea 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(100%,#eaeaea));
-	background: -webkit-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
-	background: -o-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
-	background: -ms-linear-gradient(top, #ffffff 1%,#eaeaea 100%);
-	background: linear-gradient(top, #ffffff 1%,#eaeaea 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
-	float:left;
-	box-shadow: 0px 0px 0px 1px #aaa, 1px 0px 0px 0px rgba(255,255,255,0.9) inset, 0px 1px 2px rgba(0,0,0,0.2);
+  	width: 33.33333333%;
+    margin-bottom: 0;
+  	cursor: pointer;
+  	background: #ffffff;
+  	border-radius: 3px 3px 0px 0px;
+  	float:left;
+    border-bottom: 1px solid #000000;
 }
-.ft-container label.ft-label-all{
-	border-radius: 3px 0px 0px 3px;
-}
-.ft-container label.ft-label-outdoor{
-	border-radius: 0px 3px 3px 0px;
-}
+
 .ft-container input.ft-selector-all:checked ~ label.ft-label-all,
 .ft-container input.ft-selector-indoor:checked ~ label.ft-label-indoor,
 .ft-container input.ft-selector-outdoor:checked ~ label.ft-label-outdoor{
-	background: #646d93;
-	background: -moz-linear-gradient(top, #646d93 0%, #7c87ad 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#646d93), color-stop(100%,#7c87ad));
-	background: -webkit-linear-gradient(top, #646d93 0%,#7c87ad 100%);
-	background: -o-linear-gradient(top, #646d93 0%,#7c87ad 100%);
-	background: -ms-linear-gradient(top, #646d93 0%,#7c87ad 100%);
-	background: linear-gradient(top, #646d93 0%,#7c87ad 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#646d93', endColorstr='#7c87ad',GradientType=0 );
-	color: #424d71;
-	text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
-	box-shadow: 0px 0px 0px 1px #40496e, 0 1px 2px rgba(0,0,0,0.1) inset;
-}
-.ft-container input{
-	display: none;
+    border: 1px solid #000000;
+    border-bottom: 0;
+    background-color: #efefef;
 }
 
-.carousel-inner>.item>img,
+.ft-container input{
+  	display: none;
+}
+
 .carousel-inner>.item>a>img{
-  object-fit: none; /* Do not scale the image */
-  object-position: center; /* Center the image within the element */
-  height: 350px;
-  width: 350px;
+    object-fit: none;
+    object-position: center;
+    height: 200px;
+    width: 200px;
+}
+
+@media (min-width: 700px) {
+  .carousel-inner>.item>a>img{
+    object-fit: none; /
+    object-position: center;
+    height: 400px;
+    width: 400px;
+  }
 }

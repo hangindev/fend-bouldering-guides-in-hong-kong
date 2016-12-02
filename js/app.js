@@ -1,3 +1,4 @@
+// Bouldering location info
 var spots = [
   {title: 'Just Climb Climbing Gym', location: {lat: 22.3345, lng: 114.198961}, indoor:true},
   {title: 'Attic V Climbing Gym', location: {lat: 22.248501, lng: 114.168127}, indoor:true},
@@ -9,38 +10,41 @@ var spots = [
   {title: 'Shek Lung Kung', location: {lat: 22.383353,  lng: 114.083333}, indoor:false}
 ];
 
+// Google map styles
 var styles = [
     {
-        "featureType": "landscape",
+        "featureType": "landscape.natural",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "hue": "#FFBB00"
+                "color": "#f5f5f2"
             },
             {
-                "saturation": 43.400000000000006
+                "visibility": "on"
+            }
+          ]
+        },
+
+    {        "featureType": "landscape.man_made",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
             },
             {
-                "lightness": 37.599999999999994
-            },
-            {
-                "gamma": 1
+                "visibility": "on"
             }
         ]
     },
     {
         "featureType": "road.highway",
+        "elementType": "geometry",
         "stylers": [
             {
-                "hue": "#FFC200"
+                "color": "#ffffff"
             },
             {
-                "saturation": -61.8
-            },
-            {
-                "lightness": 45.599999999999994
-            },
-            {
-                "gamma": 1
+                "visibility": "simplified"
             }
         ]
     },
@@ -48,16 +52,31 @@ var styles = [
         "featureType": "road.arterial",
         "stylers": [
             {
-                "hue": "#FF0300"
+                "visibility": "simplified"
             },
             {
-                "saturation": -100
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "color": "#ffffff"
             },
             {
-                "lightness": 51.19999999999999
-            },
+                "visibility": "off"
+            }
+        ]
+    },
+
+    {
+        "featureType": "road.arterial",
+        "stylers": [
             {
-                "gamma": 1
+                "color": "#ffffff"
             }
         ]
     },
@@ -65,16 +84,7 @@ var styles = [
         "featureType": "road.local",
         "stylers": [
             {
-                "hue": "#FF0300"
-            },
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 52
-            },
-            {
-                "gamma": 1
+                "color": "#ffffff"
             }
         ]
     },
@@ -82,35 +92,130 @@ var styles = [
         "featureType": "water",
         "stylers": [
             {
-                "hue": "#0078FF"
-            },
-            {
-                "saturation": -13.200000000000003
-            },
-            {
-                "lightness": 2.4000000000000057
-            },
-            {
-                "gamma": 1
+                "color": "#71c8d4"
             }
         ]
     },
     {
-        "featureType": "poi",
+        "featureType": "landscape",
         "stylers": [
             {
-                "hue": "#00FF6A"
-            },
-            {
-                "saturation": -1.0989010989011234
-            },
-            {
-                "lightness": 11.200000000000017
-            },
-            {
-                "gamma": 1
+                "color": "#e5e8e7"
             }
         ]
+    },
+    {
+        "featureType": "poi.park",
+        "stylers": [
+            {
+                "color": "#8ba129"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#c7c7c7"
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "color": "#a0d3d3"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "stylers": [
+            {
+                "color": "#91b65d"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "stylers": [
+            {
+                "gamma": 1.51
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+
+    {
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road"
+    },
+    {
+        "featureType": "road"
+    },
+    {
+        "featureType": "road.highway"
     }
 ]
 
@@ -123,16 +228,19 @@ $(document).ready(function () {
 function ViewModel() {
     var self = this;
 
+    // Initialize map
     var map = new google.maps.Map(document.getElementById('map'), {
       center: hongkongCenter,
       styles: styles,
       disableDefaultUI: true,
-      zoom: 11
+      zoom: ( window.matchMedia("(min-width: 400px)").matches ) ? 11 : 10
     });
-    var largeInfowindow = new google.maps.InfoWindow();
-    // var bounds = new google.maps.LatLngBounds();
+
+    this.infowindow = new google.maps.InfoWindow();
     this.selectedOption = ko.observable("All");
     this.markers = ko.observableArray([]);
+
+    // Initialize markers according to the bouldering location info
     spots.forEach(function(spot){
       var position = spot.location,
           title = spot.title,
@@ -148,14 +256,12 @@ function ViewModel() {
 
       self.markers.push(marker);
       marker.addListener('click', function() {
-        var lat = this.getPosition().lat()
-        var lng = this.getPosition().lng()
-        map.setCenter({lat: lat + 0.12, lng: lng});
-        populateInfoWindow(this, largeInfowindow);
+        self.bounce(this);
+        self.populateInfoWindow(this);
       });
     });
 
-
+    // Render location list when document ready/ users click on filter buttons
     (this.changeList = function() {
       hideMarkers();
       switch(self.selectedOption()) {
@@ -196,7 +302,35 @@ function ViewModel() {
       }
     };
 
-    function populateInfoWindow(marker, infowindow) {
+    this.openMenu = function() {
+        document.getElementById("sideMenu").style.width = "320px";
+        document.getElementById("sideMenu").style.left = "0";
+    }
+
+    this.closeMenu = function() {
+        document.getElementById("sideMenu").style.width = "0";
+        document.getElementById("sideMenu").style.left = "-30px";
+    }
+
+    // Marker bounces for 1500ms
+    this.bounce = function(marker) {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function () {
+          marker.setAnimation(null);
+      }, 1500);
+    };
+
+    // Population info window
+    this.populateInfoWindow = function(marker) {
+      var infowindow = self.infowindow;
+
+      // Use marker location as the map center
+      var lat = marker.getPosition().lat();
+      var lng = marker.getPosition().lng();
+      var latoffset = 0.15;
+      map.setCenter({lat: lat + latoffset, lng: lng});
+
+      // Open one info window at a time
       if (infowindow.marker != marker) {
         infowindow.setContent('');
         infowindow.marker = marker;
@@ -214,43 +348,63 @@ function ViewModel() {
           'nojsoncallback': "1"
         });
 
-        infowindow.setContent('<div>' + marker.title + '</div>' + '<div>Loading...</div>');
+        //Set loading msg
+        infowindow.setContent('<h4 class="text-center">' + marker.title + '</h4><br>' + '<p class="text-center">Loading...</p>');
 
-        $.getJSON(flickrurl, function(rsp) {
-          var content = `
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators"></ol>
+          // Get json from Flickr
+          $.getJSON(flickrurl, function(rsp) {
 
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner" role="listbox"></div>
+            // If no related photos are found, update info window msg
+            if (rsp.photos.photo.length === 0) {
+              infowindow.setContent('<h4 class="text-center">' + marker.title + '</h4><br>' + '<p class="text-center">No related photos in Flickr</p>');
+            }
 
-              <!-- Controls -->
-              <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-              </a>
-            </div>
-          `
-          infowindow.setContent(content);
-          for (var i=0 ; i < rsp.photos.photo.length && i < 5; i++) {
-            photo = rsp.photos.photo[i];
-            z_url = "http://farm" + photo.farm + ".static.flickr.com/" +
-              photo.server + "/" + photo.id + "_" + photo.secret + "_" + "z.jpg";
-            p_url = "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
-            $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="'+ i + '"></li>');
-            $('.carousel-inner').append('<div class="item"><a href="' + p_url + '">' + '<img alt="'+ photo.title + '"src="' + z_url + '"/>' + '</a></div>');
+            // Populate info window with Flickr photos(max. 8) using Bootstrap Carousel
+            else {
+              var content = '<h4 class="text-center">' + marker.title + '</h4>' + `
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators"></ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox"></div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+              <p class="text-right">Photos from Flickr</p>
+            `
+            infowindow.setContent(content);
+
+            for (var i=0 ; i < rsp.photos.photo.length && i < 8; i++) {
+              photo = rsp.photos.photo[i];
+              z_url = "http://farm" + photo.farm + ".static.flickr.com/" +
+                photo.server + "/" + photo.id + "_" + photo.secret + "_" + "z.jpg";
+              p_url = "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
+              $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="'+ i + '"></li>');
+              $('.carousel-inner').append('<div class="item"><a href="' + p_url + '">' + '<img alt="'+ photo.title + '"src="' + z_url + '"/>' + '</a></div>');
+            }
+            $('.carousel-indicators li').first().addClass("active");
+            $('.carousel-inner .item').first().addClass("active");
           }
-          $('.carousel-indicators li').first().addClass("active");
-          $('.carousel-inner .item').first().addClass("active");
-        }).fail(function() {
+
+        })
+
+        // If data can't be loaded, update info window msg
+        .fail(function() {
           infowindow.setContent('<div>' + marker.title + '</div>' + '<div>Could not load photos from Flickr</div>')
         });
+
+        // Display info window on map
         infowindow.open(map, marker);
       }
     };
+
 }
