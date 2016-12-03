@@ -3,19 +3,19 @@
     <meta charset="UTF-8">
     <title>Bouldering Guides in Hong Kong</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
 </head>
 <body>
 
-  <div id="sideMenu" class="sideMenu container-fluid">
+  <aside class="sideMenu-close container-fluid" data-bind="css: sideMenuStatus">
 
     <div class="row">
       <div class="col-md-12">
         <header>
-          <span class="glyphicon glyphicon-remove remove-icon" data-bind="click: closeMenu"></span>
+          <span class="glyphicon glyphicon-remove remove-icon" data-bind="click: togglesideMenu"></span>
           <h3>Bouldering Guides</h3>
           <h4>in Hong Kong</h4>
           <br>
@@ -40,7 +40,7 @@
       <div class="col-md-12">
         <ul class="list-unstyled placelist" data-bind="foreach: markers">
           <!-- ko if: displayText -->
-          <li class="placelist-item" data-bind="text: title, click: function() { $parent.populateInfoWindow(this) }"></li>
+          <li class="placelist-item" data-bind="text: title, click: function() { $parent.populateInfoWindow(this); $parent.bounce(this); }"></li>
           <!-- /ko -->
         </ul>
       </div>
@@ -55,30 +55,31 @@
       </div>
     </div>
 
-  </div>
+  </aside>
 
-  <div id="main" class="container-fluid fill">
+  <main class="container-fluid fill">
 
-    <span class="menu-icon" data-bind="click: openMenu">&#9776; Menu</span>
+    <span class="menu-icon" data-bind="click: togglesideMenu">&#9776; Menu</span>
 
     <div class="row fill">
       <div id="map"></div>
     </div>
 
-    <div class="title">
+    <header class="title">
       <p class="title1 text-right">Bouldering Guides</p>
       <p class="title2 text-right">in Hong Kong</p>
-    </div>
+    </header>
 
-  </div>
+  </main>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src="js/knockout-3.4.1.js"></script>
-  <!-- Google Maps -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ4XpBz3d2MQfC_lSV6A--aJ8wK7xFs00&v=3"></script>
   <!-- App -->
   <script src="js/app.js"></script>
+  <!-- Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJ4XpBz3d2MQfC_lSV6A--aJ8wK7xFs00&v=3" onerror="mapError()"></script>
+
 
 </body>
 </html>

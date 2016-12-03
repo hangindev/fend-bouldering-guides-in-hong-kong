@@ -236,6 +236,14 @@ function ViewModel() {
       zoom: ( window.matchMedia("(min-width: 400px)").matches ) ? 11 : 10
     });
 
+    this.sideMenuOpen =  ko.observable(false);
+
+    this.togglesideMenu = function() { self.sideMenuOpen(!self.sideMenuOpen()) };
+
+    this.sideMenuStatus = ko.pureComputed(function() {
+        return self.sideMenuOpen() === true ? "sideMenu-open" : "sideMenu-close";
+    }, ViewModel);
+
     this.infowindow = new google.maps.InfoWindow();
     this.selectedOption = ko.observable("All");
     this.markers = ko.observableArray([]);
@@ -251,6 +259,8 @@ function ViewModel() {
         icon: (indoor) ? 'images/climbing-22.png' : 'images/outdoor.png',
         animation: google.maps.Animation.DROP,
         indoor: indoor,
+        map: map,
+        visible: true,
         displayText: ko.observable(false)
       });
 
@@ -270,7 +280,7 @@ function ViewModel() {
                 var marker = self.markers()[i];
                 marker.displayText(false);
                 if (marker.indoor) {
-                  marker.setMap(map);
+                  marker.setVisible(true);
                   marker.displayText(true);
                 }
               }
@@ -280,7 +290,7 @@ function ViewModel() {
                 var marker = self.markers()[i];
                 marker.displayText(false);
                 if (!marker.indoor) {
-                  marker.setMap(map);
+                  marker.setVisible(true);
                   marker.displayText(true);
                 }
               }
@@ -288,7 +298,7 @@ function ViewModel() {
           default:
               for (var i = 0; i < self.markers().length; i++) {
                 var marker = self.markers()[i];
-                marker.setMap(map);
+                marker.setVisible(true);
                 marker.displayText(true);
               }
               break;
@@ -298,19 +308,9 @@ function ViewModel() {
 
     function hideMarkers() {
       for (var i = 0; i < self.markers().length; i++) {
-        self.markers()[i].setMap(null);
+        self.markers()[i].setVisible(false);
       }
     };
-
-    this.openMenu = function() {
-        document.getElementById("sideMenu").style.width = "320px";
-        document.getElementById("sideMenu").style.left = "0";
-    }
-
-    this.closeMenu = function() {
-        document.getElementById("sideMenu").style.width = "0";
-        document.getElementById("sideMenu").style.left = "-30px";
-    }
 
     // Marker bounces for 1500ms
     this.bounce = function(marker) {
@@ -364,10 +364,14 @@ function ViewModel() {
               var content = '<h4 class="text-center">' + marker.title + '</h4>' + `
               <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
-                <ol class="carousel-indicators"></ol>
+                <ol class="carousel-indicators">
+
+                </ol>
 
                 <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox"></div>
+                <div class="carousel-inner" role="listbox">
+
+                </div>
 
                 <!-- Controls -->
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -407,4 +411,8 @@ function ViewModel() {
       }
     };
 
+}
+
+mapError = function() {
+  window.alert("Google map cannot be loaded currently.");
 }
