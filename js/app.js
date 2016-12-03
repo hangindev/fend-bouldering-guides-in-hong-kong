@@ -244,9 +244,19 @@ function ViewModel() {
         return self.sideMenuOpen() === true ? "sideMenu-open" : "sideMenu-close";
     }, ViewModel);
 
-    this.infowindow = new google.maps.InfoWindow();
+    this.infowindow = new google.maps.InfoWindow({
+      maxWidth: 400
+    });
+
+
     this.selectedOption = ko.observable("All");
     this.markers = ko.observableArray([]);
+
+    this.carouselPhotos = ko.observableArray([]);
+
+    function infowindowViewModel() {
+      this.carouselPhotos = self.carouselPhotos;
+    }
 
     // Initialize markers according to the bouldering location info
     spots.forEach(function(spot){
@@ -263,7 +273,6 @@ function ViewModel() {
         visible: true,
         displayText: ko.observable(false)
       });
-
       self.markers.push(marker);
       marker.addListener('click', function() {
         self.bounce(this);
@@ -339,6 +348,7 @@ function ViewModel() {
           infowindow.marker = null;
         });
 
+
         var flickrurl = "https://api.flickr.com/services/rest/";
         flickrurl += '?' + $.param({
           'method': "flickr.photos.search",
@@ -347,6 +357,8 @@ function ViewModel() {
           'format': "json",
           'nojsoncallback': "1"
         });
+
+        self.carouselPhotos.removeAll();
 
         //Set loading msg
         infowindow.setContent('<h4 class="text-center">' + marker.title + '</h4><br>' + '<p class="text-center">Loading...</p>');
@@ -361,51 +373,31 @@ function ViewModel() {
 
             // Populate info window with Flickr photos(max. 8) using Bootstrap Carousel
             else {
-              var content = '<h4 class="text-center">' + marker.title + '</h4>' + `
-              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-
-                </div>
-
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>
-              <p class="text-right">Photos from Flickr</p>
+              var content = '<div id="infoWindow"><h4 class="text-center">' + marker.title + '</h4>' + `
+              <div data-bind="carousel: { content: { data: carouselPhotos } }"></div>
+              <p class="text-right">Photos from Flickr</p></div>
             `
+            infowindow.addListener('domready', function() {
+              ko.applyBindings(infowindowViewModel, document.getElementById("infoWindow"));
+            });
             infowindow.setContent(content);
-
             for (var i=0 ; i < rsp.photos.photo.length && i < 8; i++) {
               photo = rsp.photos.photo[i];
-              z_url = "http://farm" + photo.farm + ".static.flickr.com/" +
-                photo.server + "/" + photo.id + "_" + photo.secret + "_" + "z.jpg";
-              p_url = "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
-              $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="'+ i + '"></li>');
-              $('.carousel-inner').append('<div class="item"><a href="' + p_url + '">' + '<img alt="'+ photo.title + '"src="' + z_url + '"/>' + '</a></div>');
+              src = "http://farm" + photo.farm + ".static.flickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_" + "z.jpg";
+              link = "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
+              self.carouselPhotos.push({
+                src: src,
+                alt: photo.title,
+                content: ''
+              })
             }
-            $('.carousel-indicators li').first().addClass("active");
-            $('.carousel-inner .item').first().addClass("active");
           }
-
         })
 
         // If data can't be loaded, update info window msg
         .fail(function() {
           infowindow.setContent('<div>' + marker.title + '</div>' + '<div>Could not load photos from Flickr</div>')
         });
-
         // Display info window on map
         infowindow.open(map, marker);
       }

@@ -11,6 +11,7 @@ This is my Neighborhood Map Project for Udacity Front-End Developer Nanodegree. 
 * Bootstrap
 
 #### Instruction
+* To open the page, clone this repository to your local drive and open "index.html"
 * Markers of all spots are shown on map by default.
 * Click menu button to see all bouldering places.
 * User can apply filter places (indoor/outdoor)

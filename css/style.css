@@ -156,18 +156,9 @@ main {
   	display: none;
 }
 
-.carousel-inner>.item>a>img{
+.carousel-inner>.item>img{
     object-fit: none;
-    object-position: center;
-    height: 200px;
-    width: 200px;
-}
-
-@media (min-width: 700px) {
-  .carousel-inner>.item>a>img{
-    object-fit: none; /
     object-position: center;
     height: 400px;
     width: 400px;
-  }
 }
