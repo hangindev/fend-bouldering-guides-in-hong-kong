@@ -2,7 +2,8 @@
 
 #### Intro
 This is my Neighborhood Map Project for Udacity Front-End Developer Nanodegree. I developed a single page map application of the bouldering (a type of climbing) places in Hong Kong.
-[https://nrator.github.io/fend-bouldering-guides-in-hong-kong/]
+
+https://nrator.github.io/fend-bouldering-guides-in-hong-kong/
 
 #### Tools used
 * **Knockout JS** (responsible for list population and "event" bindings)
