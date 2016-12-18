@@ -1,13 +1,13 @@
 // Bouldering location info
 var spots = [
-  {title: 'Just Climb Climbing Gym', location: {lat: 22.3345, lng: 114.198961}, indoor:true},
-  {title: 'Attic V Climbing Gym', location: {lat: 22.248501, lng: 114.168127}, indoor:true},
-  {title: 'GoNature Climbing Gym', location: {lat: 22.309079, lng: 114.224477}, indoor:true},
   {title: 'Ha Fa Shan bouldering', location: {lat: 22.383145, lng: 114.094746}, indoor:false},
   {title: 'Shek O Bouldering', location: {lat: 22.228432, lng: 114.2560054}, indoor:false},
   {title: 'Lamma Bouldering', location: {lat: 22.1979449, lng: 114.132661}, indoor:false},
   {title: 'Chung Hom Kok Bouldering', location: {lat: 22.212925, lng: 114.205061}, indoor:false},
-  {title: 'Shek Lung Kung', location: {lat: 22.383353,  lng: 114.083333}, indoor:false}
+  {title: 'Shek Lung Kung', location: {lat: 22.383353,  lng: 114.083333}, indoor:false},
+  {title: 'Just Climb Climbing Gym', location: {lat: 22.3345, lng: 114.198961}, indoor:true},
+  {title: 'Attic V Climbing Gym', location: {lat: 22.248501, lng: 114.168127}, indoor:true},
+  {title: 'GoNature Climbing Gym', location: {lat: 22.309079, lng: 114.224477}, indoor:true}
 ];
 
 // Google map styles
