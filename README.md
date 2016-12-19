@@ -3,7 +3,7 @@
 [![screenshot.png](https://s27.postimg.org/m7u6y87wj/screenshot.png)](https://postimg.org/image/8qx8fcxkv/)
 
 #### Intro
-This is my Neighborhood Map Project for Udacity Front-End Developer Nanodegree. I developed a single page map application of the bouldering (a type of climbing) places in Hong Kong.
+This is my Neighborhood Map Project for Udacity Front-End Developer Nanodegree. With the hope in promoting climbing in Hong Kong, I developed a single page map application of the bouldering (a type of climbing) places in Hong Kong.
 
 #### Project link
 https://nrator.github.io/fend-bouldering-guides-in-hong-kong/
